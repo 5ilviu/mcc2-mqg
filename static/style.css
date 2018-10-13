@@ -35,3 +35,9 @@ span.mmr-value {
     padding: 10px;
     color: white;
 }
+.pull-left {
+    float:left;
+}
+.pull-right {
+    float:right;
+}
