@@ -57,7 +57,7 @@ class GameState:
                         player.blocked = True
             ans = str(message).replace("ANSWER ", "")
             print ans
-            if self.questions[self.questionNr].qtype == 0:
+            if self.questions[self.questionNr].typeq == 0:
                 if self.questions[self.questionNr].correct == ans:
                     for rec in self.score:
                         if rec.user == user.username:
@@ -72,7 +72,7 @@ class GameState:
                                     for player in self.players:
                                         if player.user.username == user.username:
                                             player.blocked = True
-            elif self.questions[self.questionNr].qtype == 1:
+            elif self.questions[self.questionNr].typeq == 1:
                 for rec in self.score:
                     if rec.user == user.username:
                         rec.score += 10 - abs(self.questions[self.questionNr].correct - int(ans))/self.questions[self.questionNr].correct * 9
