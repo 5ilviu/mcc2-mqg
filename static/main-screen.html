@@ -64,7 +64,6 @@ $(document).ready(function(){
 
     //get rankings
     $.get( "/api/stats", function( data ) {
-        $("#clasament-holder").html(data);
         // create rankings table
         $('#classamentul-final').bootstrapTable({
             columns: [{

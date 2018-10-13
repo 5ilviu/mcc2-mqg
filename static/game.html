@@ -65,6 +65,12 @@ $(document).ready(function(){
     webSocket.onmessage = function (e) {
         var obj = JSON.parse(e.data);
         console.log(obj);
+        var players = obj.players;
+        for (var i = 0, len = players.length; i < len; ++i) {
+            console.log(players[i]);
+        }
+        
+
         if(obj.ready == true) {
             $('#game-window').hide();
             $('#game').show();
