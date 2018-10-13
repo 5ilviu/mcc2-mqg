@@ -1,12 +1,17 @@
+from bson import SON
+
+
 class User:
-    def __init__(self, username, games=None, mmr=0):
+    def __init__(self, username, wins=0, lose=0, mmr=0):
         self.username = username
-        self.games = games
+        self.wins = wins
         self.mmr = mmr
+        self.lose = lose
 
     def encode(self):
         return {"username": self.username,
-                "games": self.games,
+                "wins": self.wins,
+                "lose": self.lose,
                 "mmr": self.mmr
                 }
 
@@ -18,7 +23,8 @@ class UserFactory:
     @staticmethod
     def decode(obj):
         return User(obj["username"],
-                    obj["games"],
+                    obj["wins"],
+                    obj["lose"],
                     obj["mmr"])
 
     @staticmethod
@@ -26,3 +32,11 @@ class UserFactory:
         user_list = datastore.users.find_one({"username": username})
         dbuser = UserFactory.decode(user_list)
         return dbuser
+
+    @staticmethod
+    def top(datastore):
+        top = datastore.users.aggregate([{ "$sort": SON([("mmr", 1)])}])
+        res = []
+        for u in top:
+            res.append(UserFactory.decode(u))
+        return res
