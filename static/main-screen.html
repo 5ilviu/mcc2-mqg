@@ -34,13 +34,14 @@
                         <span  id="lose" class="circle"></span>
                     </div>
                 </div>
+                <button id="go" class="btn btn-primary btn-block">Gaseste meci</button>
                 <div class="clasament col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
                     <table id="classamentul-final" border='1' style="margin-bottom:20px;">
                     </table>
                 </div>
-                <button id="go" class="btn btn-primary btn-block">Gaseste meci</button>
+                
             </div>
             <!--END-->
             <div id="loader">
@@ -85,6 +86,8 @@ $(document).ready(function(){
 
     // open websocket and check for response
     $("#go").click(function(){
+        $("#go").toggleClass('btn-primary btn-danger');
+        $("#go").html('Se gaseste meci...');
         var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
         //var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/mock");//for testing
         webSocket.onmessage = function (e) {
