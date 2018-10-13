@@ -87,9 +87,10 @@ $(document).ready(function(){
     $("#go").click(function(){
         //var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
         var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/mock");//for testing
-        webSocket.onmessage = function (message) {
-            alert(message);
-            window.location = '/static/search-game.html';// redirect to pre-game screen
+        webSocket.onmessage = function (e) {
+            alert(e.data);
+            console.log(e.data);
+            //window.location = '/static/search-game.html';// redirect to pre-game screen
         };
         webSocket.onerror = function(evt) {
             alert("Eroare");
