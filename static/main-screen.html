@@ -37,7 +37,7 @@
                 <div class="clasament col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
-                    <table id="location" border='1'>
+                    <table id="classamentul-final" border='1'>
                         <tr>
                             <th>Username</th>
                             <th>MMR</th>
@@ -71,7 +71,7 @@ $(document).ready(function(){
     $.get( "/api/stats", function( data ) {
         console.log(data);
         $("#clasament-holder").html(data);
-        $('#table').bootstrapTable({
+        $('#classamentul-final').bootstrapTable({
             data: data
         })
     }, "json" );
