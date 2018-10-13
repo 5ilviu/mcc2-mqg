@@ -1,6 +1,6 @@
 from user import User, UserFactory
 from data_store import Database
-from game.gamestate import GameState, Player
+from game.gamestate import GameState, Player, Question
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
@@ -10,13 +10,15 @@ import random
 from threading import Semaphore
 __author__ = "silviu"
 
+USERS_FOR_MATCH = 1
+QUESTIONS_PER_MATCH = 10
 root = os.path.dirname(__file__)
 
 mmsemaphore = Semaphore()
 GLOBALS = {
     'sockets': [],
-    'games': [],
-    'pre_lobby': []
+    'games': {},
+    'pre_game': []
 }
 
 
@@ -30,8 +32,9 @@ class Application(tornado.web.Application):
             (r"/api/login", LoginHandler),
             (r"/api/user", UserHandler),
             (r"/api/stats", StatisticsHandler),
-            (r"/api/game_socket", GameSocketHandler),
+            (r"/api/game_socket/(.*)", GameSocketHandler),
             (r"/api/pre_game_socket", PreGameSocketHandler),
+            (r"/api/mock", PreGameSocketHandlerMock),
             (r"/()", tornado.web.StaticFileHandler, {"path": root + "/static", "default_filename": "index.html"}),
             (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': settings.get("static_path")}),
         ]
@@ -41,22 +44,29 @@ class Application(tornado.web.Application):
 
 
 class PreGameSocketHandler(tornado.websocket.WebSocketHandler):
-    def open(self, name):
+    def open(self):
         user = getUser(self)
-        GLOBALS["pre_lobby"].append(
-            {
-                "user": user,
-                "socket":self
-            }
-        )
+        GLOBALS["pre_game"].append((user, self))
         makeMatch()
-        print("WebSocket opened")
+        print("PWebSocket opened")
 
     def on_message(self, message):
         self.write_message(u"You said: " + message)
 
     def on_close(self):
-        print("WebSocket closed")
+        print("PWebSocket closed")
+
+
+class PreGameSocketHandlerMock(tornado.websocket.WebSocketHandler):
+    def open(self):
+        self.write_message("asd")
+
+    def on_message(self, message):
+        self.write_message(u"You said: " + message)
+
+    def on_close(self):
+        print("PWebSocket closed")
+
 
 class LoginHandler(tornado.web.RequestHandler):
     def post(self):
@@ -92,15 +102,32 @@ class StatisticsHandler(tornado.web.RequestHandler):
 
 
 class GameSocketHandler(tornado.websocket.WebSocketHandler):
-    def open(self, name):
-        getUser(self)
-        print("WebSocket opened")
+    def open(self, gameId):
+        user = getUser(self)
+        self.gameId = gameId
+        print("WebSocket opened {}".format(gameId))
+        if gameId in GLOBALS["games"]:
+            (gamestate, sessions) = GLOBALS["games"][self.gameId]
+            sessions.append(self)
+            GLOBALS["games"][self.gameId] = (gamestate, sessions)
+            gamestate.user_connected(user)
+            broadcast(sessions, gamestate)
+        else:
+            self.close(404,"Not found")
 
     def on_message(self, message):
-        self.write_message(u"You said: " + message)
+        (gamestate, sessions) = GLOBALS["games"][self.gameId]
+        gamestate.handle_action(getUser(self), message)
+        broadcast(sessions, gamestate)
 
     def on_close(self):
+        (gamestate, sessions) = GLOBALS["games"][self.gameId]
+        sessions.remove(self)
         print("WebSocket closed")
+
+def broadcast(sessions, gamestate):
+    for s in sessions:
+        s.write_message(gamestate.encode())
 
 def getUser(handler):
     try:
@@ -119,18 +146,25 @@ def getUser(handler):
 
 def makeMatch():
     mmsemaphore.acquire()
-    if len(GLOBALS["pre_game"]) > 2:
+    if len(GLOBALS["pre_game"]) >= USERS_FOR_MATCH :
         players = []
         sessions = []
-        for i in range(3):
+        for i in range(USERS_FOR_MATCH):
             (user, session) = GLOBALS["pre_game"].pop(0)
             players.append(Player(user))
             sessions.append(session)
-        gamestate = GameState(players)
-        GLOBALS["games"].append(gamestate)
+        gamestate = GameState(players, randomQuestions())
+        GLOBALS["games"][gamestate.room] = (gamestate, [])
         for sess in sessions:
             sess.write_message(gamestate.room)
     mmsemaphore.release()
+
+def randomQuestions():
+    res = []
+    dbqs = data_store.questions.aggregate([{"$sample": {"size": QUESTIONS_PER_MATCH}}])
+    for dbq in dbqs:
+        res.append(Question.decode(dbq))
+    return res
 
 
 if __name__ == "__main__":
