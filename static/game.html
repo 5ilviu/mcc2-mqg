@@ -48,12 +48,17 @@ function findGetParameter(parameterName) {
     }
     return result;
 }
+var gameRoom = findGetParameter('room');//get room param
+var urlwebs = "ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom;
 
-
+webSocket = new WebSocket(urlwebs);
+webSocket.onmessage = function(evt) { alert('message received'); };
+webSocket.onclose = function(){
+    // Try to reconnect in 5 seconds
+    setTimeout(function(){start(urlwebs)}, 5000);
+};
 
 $(document).ready(function(){
-    var gameRoom = findGetParameter('room');
-    var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
     webSocket.onopen = function(e) { 
         
     }; 
@@ -68,16 +73,12 @@ $(document).ready(function(){
    $("#ready-to-go").click(function(){
         $("#ready-to-go").toggleClass('btn-success btn-danger');
         $("#ready-to-go").html('Se asteapta restul jucatorilor...');
-        var gameRoom = findGetParameter('room');
-        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
         webSocket.send("READY");
    });
 });
 document.body.addEventListener('click', checkEvent, true); 
 function checkEvent(e) {
     efid = e.target.id;
-    var gameRoom = findGetParameter('room');
-    var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
     webSocket.onmessage = function(e) { 
         webSocket.send("ABILITY "+efid);
         console.log('data'+ e.data);
