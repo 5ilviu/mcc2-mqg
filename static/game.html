@@ -137,7 +137,9 @@ function showQuestion(obj) {
             $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'"><a href="javascript:void(0)" onclick="sendAnswer()" class="btn btn-primary btn-sm">Raspunde</a>');
         }
     } else {
-
+        if(obj.isDone == true) {
+            window.location = '/static/main-screen.html';
+        }
     }
 }
 function blockeduser(uname, obj, efid) {
