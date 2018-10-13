@@ -74,10 +74,7 @@ $(document).ready(function(){
             });                      
 
 
-        // later:
-        $.each(users, function (index, value) {
-            console.log( index + ' : ' + value );
-        });
+
         $('#users').bootstrapTable({
             columns: [{
                 field: 'username',
@@ -95,6 +92,7 @@ $(document).ready(function(){
         if(obj.ready == true) {
             $('#game-window').hide();
             $('#game').show();
+            showQuestion();
         }
     };
     webSocket.onerror = function(e) {
@@ -113,10 +111,10 @@ document.body.addEventListener('click', checkEvent, true);
 function checkEvent(e) {
     efid = e.target.id;
     if(efid == 'ef-pd' || efid == 'ef-re' || efid == 'ef-mt') {
-        webSocket.onmessage = function(e) { 
-            webSocket.send("ABILITY "+efid);
-            console.log('data'+ e.data);
-        };
+
+        webSocket.send("ABILITY "+efid);
+        console.log('data'+ e.data);
+
     }
 }
 </script>
