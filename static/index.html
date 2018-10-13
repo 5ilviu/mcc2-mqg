@@ -11,31 +11,24 @@
 </head>
 <body>
     <div class="center row">
-        <form id="login-form" method="POST" action="/api/login">
+        <form id="login-form" action="/api/login">
             <input type="text" name="login-name" id="login-name" placeholder="Alege numele de utilizator...">
             <button id="login-btn" type="" onclick="login()">Intra in joc</button>
         </form>
     </div>
 </body>
 <script>
-    /* attach a submit handler to the form */
-    $("#login-form").submit(function(event) {
-
-        /* stop form from submitting normally */
-        event.preventDefault();
-  
-        /* get the action attribute from the <form action=""> element */
-        var $form = $( this ),
-            url = $form.attr( 'action' );
-  
-        /* Send the data using post with element id name and name2*/
-        var posting = $.post( url, { name: $('#login-name').val() } );
-  
-        /* Alerts the results */
-        posting.done(function( data ) {
-          alert('success');
-        });
-      });
-
+// Attach a submit handler to the form
+function login(){
+    term = document.getElementById('login-name').value,
+    url = '/api/login'; 
+   
+    var posting = $.post( url, { name: term } );
+   
+    // Put the results in a div
+    posting.done(function( data ) {
+      console.log(data);
+    });
+}
 </script>
 </html>
