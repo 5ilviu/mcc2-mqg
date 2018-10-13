@@ -18,9 +18,15 @@
                     <span class="mmr-value">MMR curent: </span> <span id="cur-mmr"></span>
                 </div>
                 <div class="statistici col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <h2 align="center">Statistici</h2>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="wins"></div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="lose"></div>
+                    <h2 class="text-center">Statistici</h2>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+                        <p> Meciuri castigate</p>
+                        <span  id="wins" class="circle"></span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+                        <p> Meciuri pierdute</p>
+                        <span  id="lose" class="circle"></span>
+                    </div>
                 </div>
                 <div class="clasament col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h2 align="center">Clasament</h2>
@@ -40,6 +46,8 @@
             console.log( data );
             $("#username").html(data.username);
             $("#cur-mmr").html(data.mmr);
+            $("#wins").html(data.wins);
+            $("#lose").html(data.lose);
         }, "json" );
     });
 </script>
