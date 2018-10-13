@@ -1,0 +1,22 @@
+/* Additional styles*/
+span.mmr-value {
+    margin-left: 30px;
+}
+#loader {
+    z-index:9999;
+    display:none;
+    height:100%;
+    width:100%;
+    background-color:#2980b9;
+}
+.logo {
+    display:block;
+    margin:0px auto;
+}
+.text-center {
+    text-align:center;
+    margin:0px auto;
+}
+#login-btn {
+    margin-top:20px;
+}
