@@ -51,11 +51,13 @@ function findGetParameter(parameterName) {
 var gameRoom = findGetParameter('room');//get room param
 var urlwebs = "ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom;
 
+
+function start(urlwebs) {
+    webSocket = new WebSocket(urlwebs);
+}
 webSocket = new WebSocket(urlwebs);
-webSocket.onmessage = function(evt) { alert('message received'); };
 webSocket.onclose = function(){
-    // Try to reconnect in 5 seconds
-    setTimeout(function(){start(urlwebs)}, 5000);
+    setTimeout(function(){start(urlwebs)}, 2000);
 };
 
 $(document).ready(function(){
