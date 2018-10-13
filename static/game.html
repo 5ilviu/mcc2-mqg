@@ -12,28 +12,26 @@
 </head>
 <body>
     <div class="holder-first row-fluid">
-        <div class="container">
-            <img src="/static/img-res/logo.png" width="100" height="100" class="logo">
-            <h1 align="center"> Multiplayer Quiz Game </h1>
-            <div class="row" id="game-window">
-                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
-                    <table id="users"></table>
-                </div>
-                <button id="ready-to-go" class="btn btn-success btn-lg">Ready to go</button>
+        <img src="/static/img-res/logo.png" width="100" height="100" class="logo">
+        <h1 align="center"> Multiplayer Quiz Game </h1>
+        <div class="container" id="game-window">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+                <table id="users"></table>
             </div>
-            <div class="row" id="game" style="display:none;">
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="ef-playerlist">
-                        <table id="efusers"></table>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="ef-game">
-                    <div id="ef-question"></div>
-                    <div id="ef-answers"></div>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="ef-abilities">
-                    <img src="/static/img-res/lightning.png" width="40" height="40" id="ef-pd" class="ab-btns">
-                    <img src="/static/img-res/person.png" width="40" height="40" id="ef-re" class="ab-btns">
-                    <img src="/static/img-res/time.png" width="40" height="40" id="ef-mt" class="ab-btns">
-                </div>
+            <button id="ready-to-go" class="btn btn-success btn-lg">Ready to go</button>
+        </div>
+        <div class="container" id="game" style="display:none;">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="ef-playerlist">
+                    <table id="efusers"></table>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="ef-game">
+                <div id="ef-question"></div>
+                <div id="ef-answers"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="ef-abilities">
+                <img src="/static/img-res/lightning.png" width="40" height="40" id="ef-pd" class="ab-btns">
+                <img src="/static/img-res/person.png" width="40" height="40" id="ef-re" class="ab-btns">
+                <img src="/static/img-res/time.png" width="40" height="40" id="ef-mt" class="ab-btns">
             </div>
         </div>
     </div>
@@ -112,10 +110,10 @@ function checkEvent(e) {
 }
 function showQuestion(obj) {
     var uname = getCookie('username');
-    console.log(uname);
-    if(obj.questionNr != '-1') {
-        $("#ef-question").html(obj.questions[obj.questionNr].text);
-        if(obj.questions[obj.questionNr].typeq == '0') {
+    if(obj.questionNr != '-1') {//if everybody is ready
+        blockeduser(uname, obj);
+        $("#ef-question").html(obj.questions[obj.questionNr].text);//set question
+        if(obj.questions[obj.questionNr].typeq == '0') {//set answers for multiple 
             var answer = '';
             var i;
             var arAnswers = obj.questions[obj.questionNr].answers;
@@ -123,11 +121,14 @@ function showQuestion(obj) {
                 answer += '<div id="'+arAnswers[i]+'" class="answer-form">'+arAnswers[i]+'</div>';
             }
             $("#ef-answers").html(answer);
-        } else {
+        } else {//set answer box for aprox
             $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'">');
         }
-        
+
     }
+}
+function blockeduser(uname, obj) {
+    if(uname == obj.)
 }
 </script>
 </body>
