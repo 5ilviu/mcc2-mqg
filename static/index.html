@@ -18,22 +18,15 @@
     </div>
 </body>
 <script>
-// Attach a submit handler to the form
-function login(){
-    term = document.getElementById('login-name').value,
-    url = '/api/login'; 
-
-    var posting = $.post(
-        url,
-        type:'POST',
-        { name: term }
-     
-      );
-   
-    // Put the results in a div
-    posting.done(function( data ) {
-      console.log(data);
-    });
-}
+        $("login-btn").click(function(){
+            
+            $.post("/api/login",
+            {
+                name: $("login-name").val()
+            },
+            function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+        });
 </script>
 </html>
