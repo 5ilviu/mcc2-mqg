@@ -36,7 +36,7 @@
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
                 </div>
-                <button id="go" class="btn btn-default pull-right">Gaseste meci</button>
+                <button id="go" class="btn btn-primary btn-block">Gaseste meci</button>
             </div>
             <!--END-->
             <div id="loader">
@@ -51,6 +51,10 @@
             $("#cur-mmr").html(data.mmr);
             $("#wins").html(data.wins);
             $("#lose").html(data.lose);
+        }, "json" );
+        $.get( "/api/stats", function( data ) {
+            console.log(data);
+            $("#clasament-holder").html(data);
         }, "json" );
     });
 </script>
