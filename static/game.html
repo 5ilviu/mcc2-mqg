@@ -66,13 +66,12 @@ $(document).ready(function(){
         var obj = JSON.parse(e.data);
         console.log(obj);
         var players = obj.players;
-        var users = new JSONObject();
+        var users = [];
         for (var i = 0, len = players.length; i < len; ++i) {
-            users.put("ready", players[i].ready);
-            users.put("connected", players[i].connected);
-            users.put("username", players[i].user.username);
+            users['username'] = players[i].user.username;
+            users['ready'] = players[i].ready;
+            users['connected'] = players[i].connected;
         }
-        users = JSON.parse(users);
         $('#users').bootstrapTable({
             columns: [{
                 field: 'username',
