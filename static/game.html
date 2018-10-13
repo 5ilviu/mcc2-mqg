@@ -72,6 +72,7 @@ $(document).ready(function(){
             users['ready'] = players[i].ready;
             users['connected'] = players[i].connected;
         }
+        console.log(users);
         $('#users').bootstrapTable({
             columns: [{
                 field: 'username',
@@ -101,6 +102,8 @@ $(document).ready(function(){
         webSocket.send("READY");
    });
 });
+
+// ENDTURN dupa 5 secunde
 document.body.addEventListener('click', checkEvent, true); 
 function checkEvent(e) {
     efid = e.target.id;
