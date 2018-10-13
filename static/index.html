@@ -11,43 +11,31 @@
 </head>
 <body>
     <div class="center row">
-        <input type="text" name="login-name" id="login-name" placeholder="Alege numele de utilizator...">
-        <button id="login-btn" type="submit" onclick="login()">Intra in joc</button>
-        
+        <form id="login-form" method="POST" action="/api/login">
+            <input type="text" name="login-name" id="login-name" placeholder="Alege numele de utilizator...">
+            <button id="login-btn" type="submit" onclick="login()">Intra in joc</button>
+        </form>
     </div>
 </body>
-<script type="text/javascript">
-/**
- * sends a request to the specified url from a form. this will change the window location.
- * @param {string} path the path to send the post request to
- * @param {object} params the paramiters to add to the url
- * @param {string} [method=post] the method to use on the form
- */
+<script>
+    /* attach a submit handler to the form */
+    $("#formoid").submit(function(event) {
 
- function post(path, params, method) {
-    method = method || "post"; // Set method to post by default if not specified.
+        /* stop form from submitting normally */
+        event.preventDefault();
+  
+        /* get the action attribute from the <form action=""> element */
+        var $form = $( this ),
+            url = $form.attr( 'action' );
+  
+        /* Send the data using post with element id name and name2*/
+        var posting = $.post( url, { name: $('#login-name').val() } );
+  
+        /* Alerts the results */
+        posting.done(function( data ) {
+          alert('success');
+        });
+      });
 
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
-
-    for(var key in params) {
-        if(params.hasOwnProperty(key)) {
-            var hiddenField = document.createElement("input");
-            hiddenField.setAttribute("type", "hidden");
-            hiddenField.setAttribute("name", key);
-            hiddenField.setAttribute("value", params[key]);
-
-            form.appendChild(hiddenField);
-        }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-}
-function login() {
-    var Username = document.getElementById('login-name').value;
-    post('/api/login', {name: Username});
-}
 </script>
 </html>
