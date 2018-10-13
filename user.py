@@ -35,7 +35,7 @@ class UserFactory:
 
     @staticmethod
     def top(datastore):
-        top = datastore.users.aggregate([{ "$sort": SON([("mmr", 1)])}])
+        top = datastore.users.aggregate([{"$sort": SON([("mmr", -1)])}, {"$limit": 10}])
         res = []
         for u in top:
             res.append(UserFactory.decode(u))
