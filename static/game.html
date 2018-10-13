@@ -91,6 +91,10 @@ function checkEvent(e) {
     if(efid == 'ef-pd' || efid == 'ef-re' || efid == 'ef-mt') {
         webSocket.send("ABILITY "+efid);
     }
+    if(e.target.classList.contains("answer-form"))  {
+        webSocket.send("ANSWER "+efid);
+    }
+    console.log(e.target);
 }
 function showQuestion(obj) {
     if(obj.questionNr != '-1') {
