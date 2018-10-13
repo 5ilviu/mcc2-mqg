@@ -34,19 +34,11 @@
         </div>
     </div>
 <script>
-    console.log(document.cookie);
     $(document).ready(function(){
-            $.get("/api/user",
-            {
-                name: 'asd'
-            },
-            function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
-            });
+        $.get( "/api/user", function( data ) {
+            console.log( data );
+          });
     });
-    //var response = {"username": "asd", "games": null, "mmr": 0};
-    //var obj = jQuery.parseJSON( response );
-    //alert( obj.username); 
 </script>
 </body>
 </html>
