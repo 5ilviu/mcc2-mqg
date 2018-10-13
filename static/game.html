@@ -73,23 +73,7 @@ var gameState = '';
 var uname = getCookie('username');
 var gameRoom = findGetParameter('room');//get room param
 var urlwebs = "ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom;
-var questionCUR = -1;
-var timer = 10;
-function timer() {
-    if(questionCUR == gameState.questionNr) {
-        var i = 100;
 
-        var counterBack = setInterval(function () {
-        i--;
-        if (i > 0) {
-            $('.progress-bar').css('width', i + '%');
-        } else {
-            clearInterval(counterBack);
-        }
-
-        }, 1000);
-    }
-}
 
 function start(urlwebs) {
     webSocket = new WebSocket(urlwebs);
@@ -104,8 +88,6 @@ $(document).ready(function(){
         var obj = JSON.parse(e.data);
         console.log(obj);
         gameState = obj;
-        timer();
-        questionCUR = obj.questionNr;
 
         if(obj.ready == true) {
             $('#game-window').hide();
