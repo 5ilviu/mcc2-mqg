@@ -10,6 +10,8 @@
     </style>
 </head>
 <body>
+    <h1 align="center"> Mondly </h1>
+    <h1 align="center"> Multiplayer Quiz Game </h1>
     <div class="center row">
             <input type="text" name="login-name" id="login-name" placeholder="Alege numele de utilizator...">
             <button id="login-btn" type="">Intra in joc</button>
@@ -25,7 +27,7 @@
             },
             function(data, status){
                 if(status == '200') {
-console.log('Succes');
+                    window.location.replace("/main-screen.html?username=" + $("#login-name").val());
                 }
             });
         });
