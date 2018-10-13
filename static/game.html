@@ -63,10 +63,11 @@ $(document).ready(function(){
     webSocket.onerror = function(evt) {
         alert("Eroare");
     }; 
-   // webSocket.send("Ready to game!");
+   
    $("#ready-to-go").click(function(){
         $("#ready-to-go").toggleClass('btn-success btn-danger');
         $("#ready-to-go").html('Se asteapta restul jucatorilor...');
+        webSocket.send("READY");
    });
 });
 document.body.addEventListener('click', checkEvent, true); 
