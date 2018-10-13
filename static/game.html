@@ -68,11 +68,11 @@ $(document).ready(function(){
         var players = obj.players;
         var users = {};
 
-        $.getJSON("displayjson.php",function (obj) {
+
             $.each(obj.players, function (i, players) {
                 users[players.ready] = players.connected;
             });                      
-        });
+
 
         // later:
         $.each(users, function (index, value) {
