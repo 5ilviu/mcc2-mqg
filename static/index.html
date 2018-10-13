@@ -16,16 +16,37 @@
     </div>
 </body>
 <script type="text/javascript">
-    $(document).ready(function () {
-        //Establish the WebSocket connection and set up event handlers
-        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/login");
-        webSocket.onmessage = function (msg) { updateChat(msg); };
-        webSocket.onclose = function () { alert("WebSocket connection closed") };
+/**
+ * sends a request to the specified url from a form. this will change the window location.
+ * @param {string} path the path to send the post request to
+ * @param {object} params the paramiters to add to the url
+ * @param {string} [method=post] the method to use on the form
+ */
 
-        //Send message if "Send" is clicked
-        id("login-btn").addEventListener("click", function () {
-            sendMessage(id("login-name").value);
-        });
-    });
+ function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+function login() {
+    var Username = document.getElementById('login-name').value;
+    post('/api/login', {name: Username});
+}
 </script>
 </html>
