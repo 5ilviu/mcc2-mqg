@@ -21,7 +21,7 @@
                 </div>
                 <button id="ready-to-go" class="btn btn-success btn-lg">Ready to go</button>
             </div>
-            <div class="row" id="game">
+            <div class="row" id="game" style="display:none;">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="ef-playerlist">
                         <table id="efusers"></table>
                 </div>
@@ -62,12 +62,13 @@ webSocket.onclose = function(){
 };
 
 $(document).ready(function(){
-    webSocket.onopen = function(e) { 
-        
-    }; 
     webSocket.onmessage = function (e) {
         var obj = JSON.parse(e.data);
         console.log(obj);
+        if(obj.ready == true) {
+            $('#game-window').hide();
+            $('#game').show();
+        }
     };
     webSocket.onerror = function(e) {
         console.log(e.data);
