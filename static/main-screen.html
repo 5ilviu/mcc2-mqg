@@ -13,18 +13,20 @@
             <h1 align="center"> Multiplayer Quiz Game </h1>
             <!-- Div de inlocuit cu lobby screen -->
             <div class="row" id="ch-screen">
-                <div class="row" id="mmr-hold">Bine ai venit 
-                    <span id="username"></span>
-                    <span class="mmr-value">MMR curent: </span> <span id="cur-mmr"></span>
+                <div class="row" id="mmr-hold">
+                    <p>
+                        <span>Bine ai venit</span> <span id="username"></span>
+                        <span class="mmr-value">MMR curent: </span> <span id="cur-mmr"></span>
+                    </p>
                 </div>
-                <div class="statistici col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="statistici row">
                     <h2 class="text-center">Statistici</h2>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
-                        <p> Meciuri castigate</p>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 stats">
+                        <p>Meciuri castigate</p>
                         <span  id="wins" class="circle"></span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
-                        <p> Meciuri pierdute</p>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 stats">
+                        <p>Meciuri pierdute</p>
                         <span  id="lose" class="circle"></span>
                     </div>
                 </div>
@@ -32,7 +34,7 @@
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
                 </div>
-                <button id="go" class="btn btn-default pull-right">GO</button>
+                <button id="go" class="btn btn-default pull-right">Gaseste meci</button>
             </div>
             <!--END-->
             <div id="loader">
