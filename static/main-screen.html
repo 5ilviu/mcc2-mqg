@@ -37,7 +37,9 @@
     $(document).ready(function(){
         $.get( "/api/user", function( data ) {
             console.log( data );
-          });
+            console.log( data[0].username );
+            console.log( data[0].mmr );
+        }, "json" );
     });
 </script>
 </body>
