@@ -38,12 +38,6 @@
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
                     <table id="classamentul-final" border='1'>
-                        <tr>
-                            <th>Username</th>
-                            <th>MMR</th>
-                            <th>Wins</th>
-                            <th>Loses</th>
-                        </tr>
                     </table>
                 </div>
                 <button id="go" class="btn btn-primary btn-block">Gaseste meci</button>
@@ -72,6 +66,19 @@ $(document).ready(function(){
         console.log(data);
         $("#clasament-holder").html(data);
         $('#classamentul-final').bootstrapTable({
+            columns: [{
+                field: 'username',
+                title: 'username'
+            }, {
+                field: 'mmr',
+                title: 'MMR'
+            }, {
+                field: 'lose',
+                title: 'Loses'
+            }, {
+                field: 'wins',
+                title: 'Wins'
+            }],
             data: data
         })
     }, "json" );
