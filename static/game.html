@@ -88,7 +88,14 @@ $(document).ready(function(){
         var obj = JSON.parse(e.data);
         console.log(obj);
         gameState = obj;
-
+        var userText='';
+        var score = obj.players;
+        for (i = 0; i < score.length; i++) {
+            userText += '<p><span class="title">Username: </span><span class="subtitle">'+score[i].user.username+'</span></p>';
+            userText += '<p><span class="title">Ready: </span><span class="subtitle">'+score[i].ready+'</span></p>';
+            userText += '<p><span class="title">Connected: </span><span class="subtitle">'+score[i].connected+'</span></p>';
+        }
+        $('#users').html(userText);
         if(obj.ready == true) {
             $('#game-window').hide();
             $('#game').show();
