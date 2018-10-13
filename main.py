@@ -7,11 +7,11 @@ import tornado.websocket
 import os
 import json
 import random
-from threading import Semaphore
+from threading import Semaphore, Thread, Event
 __author__ = "silviu"
 
-USERS_FOR_MATCH = 1
-QUESTIONS_PER_MATCH = 10
+USERS_FOR_MATCH = 2
+QUESTIONS_PER_MATCH = 3
 root = os.path.dirname(__file__)
 
 mmsemaphore = Semaphore()
@@ -118,6 +118,8 @@ class GameSocketHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         (gamestate, sessions) = GLOBALS["games"][self.gameId]
         gamestate.handle_action(getUser(self), message)
+        if gamestate.isDone:
+            save_user_data(gamestate)
         broadcast(sessions, gamestate)
 
     def on_close(self):
@@ -167,10 +169,31 @@ def randomQuestions():
     return res
 
 
+class MyThread(Thread):
+    def __init__(self, event):
+        Thread.__init__(self)
+        self.stopped = event
+
+    def run(self):
+        while not self.stopped.wait(0.5):
+            for _, (gamestate, sessions) in GLOBALS["games"].iteritems():
+                if gamestate.check_time():
+                    if gamestate.isDone:
+                        save_user_data(gamestate)
+                    broadcast(sessions, gamestate)
+
+def save_user_data(gamestate):
+    for player in gamestate.players:
+        data_store.users.update({'_id':player.user._id}, {"$set": post}, upsert=False)
+
+
+stopFlag = Event()
+thread = MyThread(stopFlag)
 if __name__ == "__main__":
     data_store = Database()
-
+    thread.start()
     application = Application()
     application.listen(8080)
     tornado.ioloop.IOLoop.instance().start()
+    stopFlag.set()
 
