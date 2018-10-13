@@ -38,14 +38,17 @@ $(document).ready(function(){
     // #game-window
     // open websocket and check for response
     var gameRoom = findGetParameter('room');
-        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
-        webSocket.onmessage = function (e) {
-            console.log(e.data);
-        };
-        webSocket.onerror = function(evt) {
-            alert("Eroare");
-        }; 
-        webSocket.send("Ready to game!");
+    var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
+    websocket.onopen = function(e) { 
+        console.log(e.data) 
+    }; 
+    webSocket.onmessage = function (e) {
+        console.log(e.data);
+    };
+    webSocket.onerror = function(evt) {
+        alert("Eroare");
+    }; 
+   // webSocket.send("Ready to game!");
 });
 
 </script>
