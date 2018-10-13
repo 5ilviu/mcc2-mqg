@@ -49,10 +49,11 @@ function findGetParameter(parameterName) {
     return result;
 }
 
-var gameRoom = findGetParameter('room');
-var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
+
 
 $(document).ready(function(){
+    var gameRoom = findGetParameter('room');
+    var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
     webSocket.onopen = function(e) { 
         var obj = JSON.parse(e.data);
         console.log(obj);
@@ -67,13 +68,17 @@ $(document).ready(function(){
    $("#ready-to-go").click(function(){
         $("#ready-to-go").toggleClass('btn-success btn-danger');
         $("#ready-to-go").html('Se asteapta restul jucatorilor...');
+        var gameRoom = findGetParameter('room');
+        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
         webSocket.send("READY");
    });
 });
 document.body.addEventListener('click', checkEvent, true); 
 function checkEvent(e) {
     efid = e.target.id;
-    webSocket.send("ABILITY "+id);
+    var gameRoom = findGetParameter('room');
+    var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
+    webSocket.send("ABILITY "+efid);
     console.log(efid);
 }
 </script>
