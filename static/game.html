@@ -65,29 +65,7 @@ $(document).ready(function(){
     webSocket.onmessage = function (e) {
         var obj = JSON.parse(e.data);
         console.log(obj);
-        var players = obj.players;
-        var users = {};
 
-
-            $.each(obj.players, function (i, players) {
-                users[players.ready] = players.connected;
-            });                      
-
-
-
-        $('#users').bootstrapTable({
-            columns: [{
-                field: 'username',
-                title: 'Username'
-            }, {
-                field: 'ready',
-                title: 'Ready'
-            }, {
-                field: 'connected',
-                title: 'Connected'
-            }],
-            data: users
-        });
 
         if(obj.ready == true) {
             $('#game-window').hide();
@@ -116,8 +94,8 @@ function checkEvent(e) {
 }
 function showQuestion(obj) {
     if(obj.questionNr != '-1') {
-        var qnr = obj.questionNr;
-        $("#ef-question").html(obj.question.qnr.text);
+        var questions = obj.questionNr;
+        $("#ef-question").html(obj.questions.qnr.text);
     }
 }
 </script>
