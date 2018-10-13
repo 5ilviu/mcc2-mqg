@@ -4,7 +4,7 @@
     <script src="jquery.min.js"></script>
     <style>
         .center {
-            
+
         }
     </style>
 </head>
@@ -16,8 +16,16 @@
     </div>
 </body>
 <script type="text/javascript">
-    function login() {
+    $(document).ready(function () {
+        //Establish the WebSocket connection and set up event handlers
+        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/login");
+        webSocket.onmessage = function (msg) { updateChat(msg); };
+        webSocket.onclose = function () { alert("WebSocket connection closed") };
 
-    }
+        //Send message if "Send" is clicked
+        id("login-btn").addEventListener("click", function () {
+            sendMessage(id("login-name").value);
+        });
+    });
 </script>
 </html>
