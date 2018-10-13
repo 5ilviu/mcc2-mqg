@@ -59,9 +59,8 @@ $(document).ready(function(){
         console.log(obj);
     }; 
     webSocket.onmessage = function (e) {
-        console.log(e.data);
     };
-    webSocket.onerror = function(evt) {
+    webSocket.onerror = function(e) {
         console.log(e.data);
     }; 
    
@@ -78,8 +77,10 @@ function checkEvent(e) {
     efid = e.target.id;
     var gameRoom = findGetParameter('room');
     var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
-    webSocket.send("ABILITY "+efid);
-    console.log(efid);
+    webSocket.onopen = function(e) { 
+        webSocket.send("ABILITY "+efid);
+        console.log('data'+ e.data);
+    };
 }
 </script>
 </body>
