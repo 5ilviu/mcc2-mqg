@@ -73,6 +73,7 @@ $(document).ready(function(){
 document.body.addEventListener('click', checkEvent, true); 
 function checkEvent(e) {
     efid = e.target.id;
+    webSocket.send("ABILITY "+id);
     console.log(efid);
 }
 </script>
