@@ -17,7 +17,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
                     <table id="users"></table>
                 </div>
-                <button id="teady-to-go" class="btn btn-success btn-lg">Ready to go</button>
+                <button id="ready-to-go" class="btn btn-success btn-lg">Ready to go</button>
             </div>
         </div>
     </div>
@@ -49,6 +49,10 @@ $(document).ready(function(){
         alert("Eroare");
     }; 
    // webSocket.send("Ready to game!");
+   $("#ready-to-go").click(function(){
+        $("#ready-to-go").toggleClass('btn-success btn-danger');
+        $("#ready-to-go").html('Se asteapta restul jucatorilor...');
+   });
 });
 
 </script>
