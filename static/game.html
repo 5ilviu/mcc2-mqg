@@ -81,10 +81,12 @@ $(document).ready(function(){
 document.body.addEventListener('click', checkEvent, true); 
 function checkEvent(e) {
     efid = e.target.id;
-    webSocket.onmessage = function(e) { 
-        webSocket.send("ABILITY "+efid);
-        console.log('data'+ e.data);
-    };
+    if(efid == 'ef-pd' || efid == 'ef-re' || efid == 'ef-mt') {
+        webSocket.onmessage = function(e) { 
+            webSocket.send("ABILITY "+efid);
+            console.log('data'+ e.data);
+        };
+    }
 }
 </script>
 </body>
