@@ -94,8 +94,19 @@ function checkEvent(e) {
 }
 function showQuestion(obj) {
     if(obj.questionNr != '-1') {
-        var qnr = obj.questionNr;
-        $("#ef-question").html(obj.questions[qnr].text);
+        $("#ef-question").html(obj.questions[obj.questionNr].text);
+        if(obj.questions[obj.questionNr].typeq == '0') {
+            var answer = '';
+            var i;
+            var arAnswers = obj.questions[obj.questionNr].answer;
+            for (i = 0; i < arAnswers.length; i++) { 
+                answer += '<div id="'+i+'" class="answer-form">'+arAnswers[i]+'</div>';
+            }
+            $("#ef-answers").html(answer);
+        } else {
+            $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'">');
+        }
+        
     }
 }
 </script>
