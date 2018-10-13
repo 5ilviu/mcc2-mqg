@@ -31,7 +31,6 @@ function findGetParameter(parameterName) {
 $(document).ready(function(){
     // open websocket and check for response
     var gameRoom = findGetParameter('room');
-        //var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
         var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
         webSocket.onmessage = function (e) {
             window.location = '/static/search-game.html?room='+e.data;// redirect to pre-game screen

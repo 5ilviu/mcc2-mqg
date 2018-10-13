@@ -85,8 +85,8 @@ $(document).ready(function(){
 
     // open websocket and check for response
     $("#go").click(function(){
-        //var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
-        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/mock");//for testing
+        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
+        //var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/mock");//for testing
         webSocket.onmessage = function (e) {
             window.location = '/static/search-game.html?room='+e.data;// redirect to pre-game screen
         };
