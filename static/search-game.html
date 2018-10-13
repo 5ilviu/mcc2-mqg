@@ -13,6 +13,12 @@
         <div class="container">
             <img src="/static/img-res/logo.png" width="100" height="100" class="logo">
             <h1 align="center"> Multiplayer Quiz Game </h1>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 pull-left">
+                    <table id="users"></table>
+                </div>
+                <button id="teady-to-go" class="btn btn-success btn-lg">Ready to go</button>
+            </div>
         </div>
     </div>
 <script>
@@ -33,12 +39,12 @@ $(document).ready(function(){
     var gameRoom = findGetParameter('room');
         var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
         webSocket.onmessage = function (e) {
-            window.location = '/static/search-game.html?room='+e.data;// redirect to pre-game screen
+            console.log(e.data);
         };
         webSocket.onerror = function(evt) {
             alert("Eroare");
         }; 
-        webSocket.send("Find me a game!");
+        webSocket.send("Ready to game!");
 });
 
 </script>
