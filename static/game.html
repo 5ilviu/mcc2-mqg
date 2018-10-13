@@ -112,6 +112,7 @@ function checkEvent(e) {
 }
 function showQuestion(obj) {
     var uname = getCookie('username');
+    console.log(uname);
     if(obj.questionNr != '-1') {
         $("#ef-question").html(obj.questions[obj.questionNr].text);
         if(obj.questions[obj.questionNr].typeq == '0') {
