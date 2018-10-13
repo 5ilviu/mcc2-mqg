@@ -184,7 +184,7 @@ class MyThread(Thread):
 
 def save_user_data(gamestate):
     for player in gamestate.players:
-        data_store.users.update({'_id':player.user._id}, {"$set": post}, upsert=False)
+        data_store.users.update({'_id':player.user._id}, {"$set": player.user.encode()}, upsert=False)
 
 
 stopFlag = Event()

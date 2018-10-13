@@ -57,20 +57,26 @@ class GameState:
                         player.blocked = True
             ans = str(message).replace("ANSWER ", "")
             print ans
-            if self.questions[self.questionNr].correct == ans:
+            if self.questions[self.questionNr].qtype == 0:
+                if self.questions[self.questionNr].correct == ans:
+                    for rec in self.score:
+                        if rec.user == user.username:
+                            rec.score += 10 - ((time.time() - self.questions_start) / QUESTION_TIME) * 9
+                else:
+                    for rec in self.score:
+                        if rec.user == user.username:
+                            rec.hp -= 10
+                            if rec.hp < 0:
+                                rec.lives -= 1
+                                if rec.lives == 0:
+                                    for player in self.players:
+                                        if player.user.username == user.username:
+                                            player.blocked = True
+            elif self.questions[self.questionNr].qtype == 1:
                 for rec in self.score:
                     if rec.user == user.username:
-                        rec.score += 10 - (time.time() - self.questions_start) * 9
-            else:
-                for rec in self.score:
-                    if rec.user == user.username:
-                        rec.hp -= 10
-                        if rec.hp < 0:
-                            rec.lives -= 1
-                            if rec.lives == 0:
-                                for player in self.players:
-                                    if player.user.username == user.username:
-                                        player.blocked = True
+                        rec.score += 10 - abs(self.questions[self.questionNr].correct - int(ans))/self.questions[self.questionNr].correct * 9
+
 
         elif "ABILITY" in message:
             ability = str(message).replace("ABILITY ", "")
@@ -94,6 +100,17 @@ class GameState:
                 for sc in self.score:
                     if sc.user == player.user.username:
                         player.user.mmr += sc.score
+            maxscore = 0
+            winner = ""
+            for sc in self.score:
+                if sc.score > maxscore:
+                    maxscore = sc.score
+                    winner = sc.user
+            for player in self.players:
+                if player.user.username == winner:
+                    player.user.wins += 1
+                else:
+                    player.user.lose += 1
 
     def encode(self):
         enc_questions = []
