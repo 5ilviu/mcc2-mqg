@@ -66,10 +66,25 @@ $(document).ready(function(){
         var obj = JSON.parse(e.data);
         console.log(obj);
         var players = obj.players;
+        var users = new JSONObject();
         for (var i = 0, len = players.length; i < len; ++i) {
-            console.log(players[i]);
+            users.put("ready", players[i].ready);
+            users.put("connected", players[i].connected);
+            users.put("username", players[i].user.username);
         }
-        
+        $('#users').bootstrapTable({
+            columns: [{
+                field: 'username',
+                title: 'Username'
+            }, {
+                field: 'ready',
+                title: 'Ready'
+            }, {
+                field: 'connected',
+                title: 'Connected'
+            }],
+            data: users
+        });
 
         if(obj.ready == true) {
             $('#game-window').hide();
