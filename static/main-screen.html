@@ -52,21 +52,43 @@
         </div>
     </div>
 <script>
-    $(document).ready(function(){
-        $.get( "/api/user", function( data ) {
-            $("#username").html(data.username);
-            $("#cur-mmr").html(data.mmr);
-            $("#wins").html(data.wins);
-            $("#lose").html(data.lose);
-        }, "json" );
-        $.get( "/api/stats", function( data ) {
-            console.log(data);
-            $("#clasament-holder").html(data);
-                $('#table').bootstrapTable({
-                    data: data
-                });
-        }, "json" );
+//Establish the WebSocket connection and set up event handlers
+
+
+$(document).ready(function(){
+    //get user data
+    $.get( "/api/user", function( data ) {
+        $("#username").html(data.username);
+        $("#cur-mmr").html(data.mmr);
+        $("#wins").html(data.wins);
+        $("#lose").html(data.lose);
+    }, "json" );
+
+    //get rankings
+    $.get( "/api/stats", function( data ) {
+        console.log(data);
+        $("#clasament-holder").html(data);
+            $('#table').bootstrapTable({
+                data: data
+            });
+    }, "json" );
+
+    // open websocket and check for response
+    $("#go").click(function(){
+        var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
+        webSocket.onmessage = function () {
+            window.location = '/static/search-game.html';// redirect to pre-game screen
+        };
+        websocket.onerror = function(evt) {
+            onError(evt) 
+        }; 
+        webSocket.send();
     });
+});
+</script>
+<script>
+
+
 </script>
 </body>
 </html>
