@@ -92,7 +92,7 @@ $(document).ready(function(){
         if(obj.ready == true) {
             $('#game-window').hide();
             $('#game').show();
-            showQuestion();
+            showQuestion(obj);
         }
     };
     webSocket.onerror = function(e) {
@@ -111,10 +111,13 @@ document.body.addEventListener('click', checkEvent, true);
 function checkEvent(e) {
     efid = e.target.id;
     if(efid == 'ef-pd' || efid == 'ef-re' || efid == 'ef-mt') {
-
         webSocket.send("ABILITY "+efid);
-        console.log('data'+ e.data);
-
+    }
+}
+function showQuestion(obj) {
+    if(obj.questionNr != '-1') {
+        var qnr = obj.questionNr;
+        $("#ef-question").html(obj.question.qnr.text);
     }
 }
 </script>
