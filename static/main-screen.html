@@ -78,7 +78,7 @@ $(document).ready(function(){
         webSocket.onmessage = function () {
             window.location = '/static/search-game.html';// redirect to pre-game screen
         };
-        websocket.onerror = function(evt) {
+        webSocket.onerror = function(evt) {
             alert("Eroare");
         }; 
         webSocket.send();
