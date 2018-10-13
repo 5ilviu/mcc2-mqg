@@ -49,12 +49,13 @@ function findGetParameter(parameterName) {
     return result;
 }
 
+var gameRoom = findGetParameter('room');
+var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
+
 $(document).ready(function(){
-    // open websocket and check for response
-    var gameRoom = findGetParameter('room');
-    var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
     webSocket.onopen = function(e) { 
-        console.log(e.data) 
+        var obj = JSON.parse(e.data);
+        console.log(obj);
     }; 
     webSocket.onmessage = function (e) {
         console.log(e.data);
