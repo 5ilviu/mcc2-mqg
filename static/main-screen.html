@@ -35,6 +35,13 @@
                 <div class="clasament col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
+                    <table id="table" data-height="460">
+                        <thead>
+                            <tr>
+                                <th data-field="id">Username</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
                 <button id="go" class="btn btn-primary btn-block">Gaseste meci</button>
             </div>
@@ -55,6 +62,9 @@
         $.get( "/api/stats", function( data ) {
             console.log(data);
             $("#clasament-holder").html(data);
+                $('#table').bootstrapTable({
+                    data: data
+                });
         }, "json" );
     });
 </script>
