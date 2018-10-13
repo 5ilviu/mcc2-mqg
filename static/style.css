@@ -41,3 +41,7 @@ span.mmr-value {
 .pull-right {
     float:right;
 }
+.statistici {
+    width:600px;
+    margin:10px auto;
+}
