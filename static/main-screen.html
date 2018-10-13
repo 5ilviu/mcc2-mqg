@@ -35,12 +35,13 @@
                 <div class="clasament col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
-                    <table id="table" data-height="460">
-                        <thead>
-                            <tr>
-                                <th data-field="id">Username</th>
-                            </tr>
-                        </thead>
+                    <table id="location" border='1'>
+                        <tr>
+                            <th>Username</th>
+                                <th>MMR</th>
+                                <th>Wins</th>
+                                <th>Loses</th>
+                        </tr>
                     </table>
                 </div>
                 <button id="go" class="btn btn-primary btn-block">Gaseste meci</button>
@@ -78,7 +79,7 @@ $(document).ready(function(){
             window.location = '/static/search-game.html';// redirect to pre-game screen
         };
         websocket.onerror = function(evt) {
-            onError(evt) 
+            alert("Eroare");
         }; 
         webSocket.send();
     });
