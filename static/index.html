@@ -18,7 +18,7 @@
     </div>
 </body>
 <script>
-        $(document).ready(function(){
+    $(document).ready(function(){
         $("#login-btn").click(function(){
             
             $.post("/api/login",
@@ -26,9 +26,7 @@
                 name: $("#login-name").val()
             },
             function(data, status){
-                if(status == '200') {
-                    window.location.replace("/main-screen.html?username=" + $("#login-name").val());
-                }
+                alert("Data: " + data + "\nStatus: " + status);
             });
         });
     });
