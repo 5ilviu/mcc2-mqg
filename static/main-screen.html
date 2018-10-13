@@ -68,9 +68,7 @@ $(document).ready(function(){
     $.get( "/api/stats", function( data ) {
         console.log(data);
         $("#clasament-holder").html(data);
-            $('#table').bootstrapTable({
-                data: data
-            });
+            
     }, "json" );
 
     // open websocket and check for response
