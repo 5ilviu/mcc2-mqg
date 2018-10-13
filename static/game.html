@@ -98,7 +98,7 @@ function showQuestion(obj) {
         if(obj.questions[obj.questionNr].typeq == '0') {
             var answer = '';
             var i;
-            var arAnswers = obj.questions[obj.questionNr].answer;
+            var arAnswers = obj.questions[obj.questionNr].answers;
             for (i = 0; i < arAnswers.length; i++) { 
                 answer += '<div id="'+i+'" class="answer-form">'+arAnswers[i]+'</div>';
             }
