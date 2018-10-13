@@ -40,7 +40,7 @@
 //Establish the WebSocket connection and set up event handlers
 function findGetParameter(parameterName) {
     var result = null,
-        tmp = [];
+    tmp = [];
     var items = location.search.substr(1).split("&");
     for (var index = 0; index < items.length; index++) {
         tmp = items[index].split("=");
@@ -50,7 +50,6 @@ function findGetParameter(parameterName) {
 }
 
 $(document).ready(function(){
-    // #game-window
     // open websocket and check for response
     var gameRoom = findGetParameter('room');
     var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
@@ -61,7 +60,7 @@ $(document).ready(function(){
         console.log(e.data);
     };
     webSocket.onerror = function(evt) {
-        alert("Eroare");
+        console.log(e.data);
     }; 
    
    $("#ready-to-go").click(function(){

@@ -90,8 +90,8 @@ $(document).ready(function(){
         webSocket.onmessage = function (e) {
             window.location = '/static/game.html?room='+e.data;// redirect to pre-game screen
         };
-        webSocket.onerror = function(evt) {
-            alert("Eroare");
+        webSocket.onerror = function(e) {
+            console.log(e.data);
         }; 
         webSocket.send("Find me a game!");
     });
