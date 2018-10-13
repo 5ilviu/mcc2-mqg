@@ -113,6 +113,11 @@ function checkEvent(e) {
         blockeduser(uname, gameState, efid);
     }
 }
+function sendAnswer() {
+    var efid = document.getElementById('answer-'+gameState.questionNr).value;
+        webSocket.send("ANSWER "+efid);
+
+}
 function showQuestion(obj) {
     
     if(obj.questionNr != '-1') {//if everybody is ready
@@ -129,7 +134,7 @@ function showQuestion(obj) {
             }
             $("#ef-answers").html(answer);
         } else {//set answer box for aprox
-            $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'">');
+            $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'"><a href="javascript:void(0)" onclick="sendAnswer()" class="btn btn-primary btn-sm">Raspunde</a>');
         }
     } else {
 
