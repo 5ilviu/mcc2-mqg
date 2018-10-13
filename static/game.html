@@ -95,7 +95,7 @@ function checkEvent(e) {
 function showQuestion(obj) {
     if(obj.questionNr != '-1') {
         var qnr = obj.questionNr;
-        $("#ef-question").html(obj.questions.qnr.text);
+        $("#ef-question").html(obj.questions[qnr].text);
     }
 }
 </script>
