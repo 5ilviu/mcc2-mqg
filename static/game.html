@@ -28,7 +28,7 @@
                 <div id="ef-question" style="text-align:center;"></div>
                 <div id="ef-answers"></div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" id="ef-abilities">
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 pull-left" id="ef-abilities" style="margin-top:100px;">
                 <img src="/static/img-res/lightning.png" width="40" height="40" id="ef-pd" class="ab-btns">
                 <img src="/static/img-res/person.png" width="40" height="40" id="ef-re" class="ab-btns">
                 <img src="/static/img-res/time.png" width="40" height="40" id="ef-mt" class="ab-btns">
@@ -162,6 +162,9 @@ function blockeduser(uname, obj, efid) {
                 if(efid == corectAnswer) {
                     $('#block').show();
                     $('#block').html("CORECT");
+                } else if(players[i].blocked == true && efid == 'NU') {
+                    $('#block').show();
+                    $('#block').html("ESTI BLOCAT");
                 } else {
                     $('#block').show();
                     $('#block').html("GRESIT");
