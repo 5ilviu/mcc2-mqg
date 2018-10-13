@@ -11,7 +11,7 @@ from threading import Semaphore, Thread, Event
 __author__ = "silviu"
 
 USERS_FOR_MATCH = 2
-QUESTIONS_PER_MATCH = 3
+QUESTIONS_PER_MATCH = 5
 root = os.path.dirname(__file__)
 
 mmsemaphore = Semaphore()
