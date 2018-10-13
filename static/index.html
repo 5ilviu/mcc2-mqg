@@ -16,15 +16,17 @@
     </div>
 </body>
 <script>
-        jQuery("#login-btn").click(function(){
+        $(document).ready(function(){
+        $("#login-btn").click(function(){
             
-            jQuery.post("/api/login",
+            $.post("/api/login",
             {
-                name: jQuery("#login-name").val()
+                name: $("login-name").val()
             },
             function(data, status){
                 alert("Data: " + data + "\nStatus: " + status);
             });
         });
+    });
 </script>
 </html>
