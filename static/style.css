@@ -45,3 +45,9 @@ span.mmr-value {
     width:600px;
     margin:10px auto;
 }
+.answer-form {
+    cursor:pointer;
+    padding:5px 10px;
+    background-color:#e67e22;
+    color:white;
+}

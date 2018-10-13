@@ -38,6 +38,21 @@
         </div>
     </div>
 <script>
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 //Establish the WebSocket connection and set up event handlers
 function findGetParameter(parameterName) {
     var result = null,
@@ -94,9 +109,9 @@ function checkEvent(e) {
     if(e.target.classList.contains("answer-form"))  {
         webSocket.send("ANSWER "+efid);
     }
-    console.log(e.target);
 }
 function showQuestion(obj) {
+    var uname = getCookie('username');
     if(obj.questionNr != '-1') {
         $("#ef-question").html(obj.questions[obj.questionNr].text);
         if(obj.questions[obj.questionNr].typeq == '0') {
@@ -104,7 +119,7 @@ function showQuestion(obj) {
             var i;
             var arAnswers = obj.questions[obj.questionNr].answers;
             for (i = 0; i < arAnswers.length; i++) { 
-                answer += '<div id="'+i+'" class="answer-form">'+arAnswers[i]+'</div>';
+                answer += '<div id="'+arAnswers[i]+'" class="answer-form">'+arAnswers[i]+'</div>';
             }
             $("#ef-answers").html(answer);
         } else {
