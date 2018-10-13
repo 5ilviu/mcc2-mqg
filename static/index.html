@@ -51,7 +51,7 @@
             },
             function(data, status){
                 if(status == 'success') {
-                    window.location = '/static/main-screen.html?username=' + name;
+                    window.location = '/static/main-screen.html?username=' + $("#login-name").val();
                 }
                 alert("Data: " + data + "\nStatus: " + status);
             });
