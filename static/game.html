@@ -68,9 +68,9 @@ $(document).ready(function(){
         var players = obj.players;
         var users = [];
         for (var i = 0, len = players.length; i < len; ++i) {
-            users['username'] = players[i].user.username;
-            users['ready'] = players[i].ready;
-            users['connected'] = players[i].connected;
+            users['username'] += players[i].user.username;
+            users['ready'] += players[i].ready;
+            users['connected'] += players[i].connected;
         }
         console.log(users);
         $('#users').bootstrapTable({
