@@ -63,7 +63,7 @@ function findGetParameter(parameterName) {
     }
     return result;
 }
-
+var gameState = '';
 var uname = getCookie('username');
 var gameRoom = findGetParameter('room');//get room param
 var urlwebs = "ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom;
@@ -81,6 +81,7 @@ $(document).ready(function(){
     webSocket.onmessage = function (e) {
         var obj = JSON.parse(e.data);
         console.log(obj);
+        gameState = obj;
 
 
         if(obj.ready == true) {
@@ -109,7 +110,7 @@ function checkEvent(e) {
     }
     if(e.target.classList.contains("answer-form"))  {
         webSocket.send("ANSWER "+efid);
-        blockeduser(uname, obj, efid);
+        blockeduser(uname, gameState, efid);
     }
 }
 function showQuestion(obj) {
