@@ -72,6 +72,7 @@ $(document).ready(function(){
             users.put("connected", players[i].connected);
             users.put("username", players[i].user.username);
         }
+        users = JSON.parse(users);
         $('#users').bootstrapTable({
             columns: [{
                 field: 'username',
