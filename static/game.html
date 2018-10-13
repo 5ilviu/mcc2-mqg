@@ -123,7 +123,9 @@ function sendAnswer() {
 function showQuestion(obj) {
     
     if(obj.questionNr != '-1') {//if everybody is ready
-        
+        if(obj.isDone == true) {
+            window.location = '/static/main-screen.html';
+        }
         $('#block').hide();
         blockeduser(uname, obj, 'NU');
         $("#ef-question").html(obj.questions[obj.questionNr].text);//set question
@@ -138,11 +140,9 @@ function showQuestion(obj) {
         } else {//set answer box for aprox
             $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'"><a href="javascript:void(0)" onclick="sendAnswer()" class="btn btn-primary btn-sm">Raspunde</a>');
         }
-    } else {
-        if(obj.isDone == true) {
-            window.location = '/static/main-screen.html';
-        }
-    }
+    } 
+    
+    
 }
 function blockeduser(uname, obj, efid) {
     var i;
