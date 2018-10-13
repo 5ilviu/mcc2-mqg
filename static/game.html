@@ -4,6 +4,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
     <link rel="stylesheet" type="text/css" href="/static/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/static/img-res/favicon.ico">
@@ -21,21 +23,15 @@
             </div>
             <div class="row" id="game">
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="ef-playerlist">
-
+                        <table id="efusers"></table>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" id="ef-game">
 
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" id="ef-abilities">
-                    <p class="ab-btns" id="ef-pd">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARQSURBVFhHzZhLbBtVFIbDQ0iwARawACQ2PFZsEBIrhARCYoHaOjN+NEChSDxKVQlFqN0ERRRUqaAUiuPxY5zQplEqUppWRGoDIdieV1M5IWliYpoGQ1SblriOnXhm/J7DHecKJc5dJPWMzSf9C9vX5/y6nnPuuW6pl5DT8izHUHBbctGjOIx5CD57b3oxoEFuDmD51JZUSZ4AqcehCB7qORzGHCa8r90n+ByKVpYBVn4gmiFpUegoiazjAg5jHryL3hMTXTkoLRGNkFS62Qto19Wgu/VJHMY8JNYxXViZB1AkohmS/hg7WEC73odDmIfA0E+H+z9QQSsApE8TzdSqkGCB99hUyU0/isOYh+CzfZ1aGClDHu0gwQxJv19sV0WvrQuHMI/IoPUewWtf0UoZgNULRDO1Uhfd6NmzZXmm7UEcxjxCTCt17ZcvFSiniWZIipzfr/A+ugOHMBfR7xByyxFUHGGimVplF5z67qWkLvpeHMI8xO7Wx8dP7M2vFcd3REO1mjrzbpZ30+/jEOYieujPl+aGSlD4k2imVsvRLkCFkQh0vng3DmEe0Nl5J/qpkpVCEhXHKNHQRvVB+NRbWa7bQuMQ5oISvRq9+KkMlSzBzGYlrxzVT40oQMsdOIS5SKx9RPlnAkCdIhpaL+3WSRjvfV0Oui2v4K+bi8hYHr7U80YOtDxA5izR1HrdCH9GHrFqFHJRDE5RH5zHeujGlYECFONEQ9tTH8wNH1BEr/2nwUHrXTjF7aM/Q+hZipfVBEA2QEi4PcXGDuVRsc3o4xpOUR9Bhnph5txBBSoqStC/KeF2lLh8uITMxbnj9EM4fP1IfsfgakJEUzM6PQhJt6rk7FFN8FozgW76CRy6fka91vsldneuunuZ88TEW9HqtW8AmZO5bup5HNoYODf94fWwP49GYWLirUhd9IDI2pUgY9mBwxoHOkNnSO2hVsVsDEAWN5kr/t2D+mGbzHuo/ThkY9FvZlNnPkIFlEPDw8AGc/rtbXJgryL67Mfw8saD2s/plescKqDfNpjTUn0we26fPkEPNeyoqyXw1c4H1goI7V5NAc2PtBdEn+OyPn3j5Y2H89Dt8cmT6HRBDXydOXTvLYusLaZ3ALy08Ww8XYL/mbv56xENvX8rcNzyGF7aHFA/ezky3IFGLxkZWztd0tFj1V4XdNLP4GXNQx+95KVJNHpNV83JMRcIrF0NMZaX8JLmITh3PDLeuwePXt9DPu6DSz1tKuel38RLmkv1XhIdKkLhr2qvC/e/LfOs9RP8cXPRLz/oOVuuFFOgrf4Is2f3yajXfYs/bj5BF9U6P/YFurRn4OrIx6rkc/xsyNBpFKJ/93g+PQephWHU6+wRw4ZOI+Ccu54K97+XU5LTGjpfE4YOnUYgsFbX1dEjFcnfljZ06DQC/X8V3kOraD4sGj50GgHPWN9Bc18l5KZ24rf+X/BuakLw0QfwywbR0vIvOddb7sSI7roAAAAASUVORK5CYII=">
-                    </p>
-                    <p class="ab-btns" id="ef-re">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARQSURBVFhHzZhLbBtVFIbDQ0iwARawACQ2PFZsEBIrhARCYoHaOjN+NEChSDxKVQlFqN0ERRRUqaAUiuPxY5zQplEqUppWRGoDIdieV1M5IWliYpoGQ1SblriOnXhm/J7DHecKJc5dJPWMzSf9C9vX5/y6nnPuuW6pl5DT8izHUHBbctGjOIx5CD57b3oxoEFuDmD51JZUSZ4AqcehCB7qORzGHCa8r90n+ByKVpYBVn4gmiFpUegoiazjAg5jHryL3hMTXTkoLRGNkFS62Qto19Wgu/VJHMY8JNYxXViZB1AkohmS/hg7WEC73odDmIfA0E+H+z9QQSsApE8TzdSqkGCB99hUyU0/isOYh+CzfZ1aGClDHu0gwQxJv19sV0WvrQuHMI/IoPUewWtf0UoZgNULRDO1Uhfd6NmzZXmm7UEcxjxCTCt17ZcvFSiniWZIipzfr/A+ugOHMBfR7xByyxFUHGGimVplF5z67qWkLvpeHMI8xO7Wx8dP7M2vFcd3REO1mjrzbpZ30+/jEOYieujPl+aGSlD4k2imVsvRLkCFkQh0vng3DmEe0Nl5J/qpkpVCEhXHKNHQRvVB+NRbWa7bQuMQ5oISvRq9+KkMlSzBzGYlrxzVT40oQMsdOIS5SKx9RPlnAkCdIhpaL+3WSRjvfV0Oui2v4K+bi8hYHr7U80YOtDxA5izR1HrdCH9GHrFqFHJRDE5RH5zHeujGlYECFONEQ9tTH8wNH1BEr/2nwUHrXTjF7aM/Q+hZipfVBEA2QEi4PcXGDuVRsc3o4xpOUR9Bhnph5txBBSoqStC/KeF2lLh8uITMxbnj9EM4fP1IfsfgakJEUzM6PQhJt6rk7FFN8FozgW76CRy6fka91vsldneuunuZ88TEW9HqtW8AmZO5bup5HNoYODf94fWwP49GYWLirUhd9IDI2pUgY9mBwxoHOkNnSO2hVsVsDEAWN5kr/t2D+mGbzHuo/ThkY9FvZlNnPkIFlEPDw8AGc/rtbXJgryL67Mfw8saD2s/plescKqDfNpjTUn0we26fPkEPNeyoqyXw1c4H1goI7V5NAc2PtBdEn+OyPn3j5Y2H89Dt8cmT6HRBDXydOXTvLYusLaZ3ALy08Ww8XYL/mbv56xENvX8rcNzyGF7aHFA/ezky3IFGLxkZWztd0tFj1V4XdNLP4GXNQx+95KVJNHpNV83JMRcIrF0NMZaX8JLmITh3PDLeuwePXt9DPu6DSz1tKuel38RLmkv1XhIdKkLhr2qvC/e/LfOs9RP8cXPRLz/oOVuuFFOgrf4Is2f3yajXfYs/bj5BF9U6P/YFurRn4OrIx6rkc/xsyNBpFKJ/93g+PQephWHU6+wRw4ZOI+Ccu54K97+XU5LTGjpfE4YOnUYgsFbX1dEjFcnfljZ06DQC/X8V3kOraD4sGj50GgHPWN9Bc18l5KZ24rf+X/BuakLw0QfwywbR0vIvOddb7sSI7roAAAAASUVORK5CYII=">
-                    </p>
-                    <p class="ab-btns" id="ef-mt">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARQSURBVFhHzZhLbBtVFIbDQ0iwARawACQ2PFZsEBIrhARCYoHaOjN+NEChSDxKVQlFqN0ERRRUqaAUiuPxY5zQplEqUppWRGoDIdieV1M5IWliYpoGQ1SblriOnXhm/J7DHecKJc5dJPWMzSf9C9vX5/y6nnPuuW6pl5DT8izHUHBbctGjOIx5CD57b3oxoEFuDmD51JZUSZ4AqcehCB7qORzGHCa8r90n+ByKVpYBVn4gmiFpUegoiazjAg5jHryL3hMTXTkoLRGNkFS62Qto19Wgu/VJHMY8JNYxXViZB1AkohmS/hg7WEC73odDmIfA0E+H+z9QQSsApE8TzdSqkGCB99hUyU0/isOYh+CzfZ1aGClDHu0gwQxJv19sV0WvrQuHMI/IoPUewWtf0UoZgNULRDO1Uhfd6NmzZXmm7UEcxjxCTCt17ZcvFSiniWZIipzfr/A+ugOHMBfR7xByyxFUHGGimVplF5z67qWkLvpeHMI8xO7Wx8dP7M2vFcd3REO1mjrzbpZ30+/jEOYieujPl+aGSlD4k2imVsvRLkCFkQh0vng3DmEe0Nl5J/qpkpVCEhXHKNHQRvVB+NRbWa7bQuMQ5oISvRq9+KkMlSzBzGYlrxzVT40oQMsdOIS5SKx9RPlnAkCdIhpaL+3WSRjvfV0Oui2v4K+bi8hYHr7U80YOtDxA5izR1HrdCH9GHrFqFHJRDE5RH5zHeujGlYECFONEQ9tTH8wNH1BEr/2nwUHrXTjF7aM/Q+hZipfVBEA2QEi4PcXGDuVRsc3o4xpOUR9Bhnph5txBBSoqStC/KeF2lLh8uITMxbnj9EM4fP1IfsfgakJEUzM6PQhJt6rk7FFN8FozgW76CRy6fka91vsldneuunuZ88TEW9HqtW8AmZO5bup5HNoYODf94fWwP49GYWLirUhd9IDI2pUgY9mBwxoHOkNnSO2hVsVsDEAWN5kr/t2D+mGbzHuo/ThkY9FvZlNnPkIFlEPDw8AGc/rtbXJgryL67Mfw8saD2s/plescKqDfNpjTUn0we26fPkEPNeyoqyXw1c4H1goI7V5NAc2PtBdEn+OyPn3j5Y2H89Dt8cmT6HRBDXydOXTvLYusLaZ3ALy08Ww8XYL/mbv56xENvX8rcNzyGF7aHFA/ezky3IFGLxkZWztd0tFj1V4XdNLP4GXNQx+95KVJNHpNV83JMRcIrF0NMZaX8JLmITh3PDLeuwePXt9DPu6DSz1tKuel38RLmkv1XhIdKkLhr2qvC/e/LfOs9RP8cXPRLz/oOVuuFFOgrf4Is2f3yajXfYs/bj5BF9U6P/YFurRn4OrIx6rkc/xsyNBpFKJ/93g+PQephWHU6+wRw4ZOI+Ccu54K97+XU5LTGjpfE4YOnUYgsFbX1dEjFcnfljZ06DQC/X8V3kOraD4sGj50GgHPWN9Bc18l5KZ24rf+X/BuakLw0QfwywbR0vIvOddb7sSI7roAAAAASUVORK5CYII=">
-                    </p>
+                    <img src="/static/img-res/lightning.png" width="40" height="40" id="ef-pd" class="ab-btns">
+                    <img src="/static/img-res/person.png" width="40" height="40" id="ef-re" class="ab-btns">
+                    <img src="/static/img-res/time.png" width="40" height="40" id="ef-mt" class="ab-btns">
                 </div>
             </div>
         </div>
@@ -75,7 +71,8 @@ $(document).ready(function(){
 });
 document.body.addEventListener('click', checkEvent, true); 
 function checkEvent(e) {
-    console.log(e);
+    efid = e.target.id;
+    console.log(efid);
 }
 </script>
 </body>
