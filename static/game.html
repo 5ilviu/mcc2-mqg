@@ -145,10 +145,10 @@ function showQuestion(obj) {
     var userText='';
     var score = obj.score;
     for (i = 0; i < score.length; i++) {
-        userText += '<span class="title">Username: </span><span class="subtitle">'+score[i].user+'</span>';
-        userText += '<span class="title">Vieti: </span><span class="subtitle">'+score[i].lives+'</span>';
-        userText += '<span class="title">HP: </span><span class="subtitle">'+score[i].hp+'</span>';
-        userText += '<span class="title">Scor: </span><span class="subtitle">'+score[i].score+'</span>';
+        userText += '<p><span class="title">Username: </span><span class="subtitle">'+score[i].user+'</span></p>';
+        userText += '<p><span class="title">Vieti: </span><span class="subtitle">'+score[i].lives+'</span></p>';
+        userText += '<p><span class="title">HP: </span><span class="subtitle">'+score[i].hp+'</span></p>';
+        userText += '<p><span class="title">Scor: </span><span class="subtitle">'+score[i].score+'</span></p>';
     }
     $('#efusers').html(userText);
 }
