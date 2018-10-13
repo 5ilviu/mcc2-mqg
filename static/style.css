@@ -58,3 +58,11 @@ div#ef-answers {
     display: block;
     height: 40px;
 }
+div#block {
+    z-index: 9999999999;
+    background: #000c;
+    color: #fff;
+    font-weight: 900;
+    font-size: 30px;
+    text-align: center;
+}
