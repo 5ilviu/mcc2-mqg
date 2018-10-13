@@ -117,13 +117,14 @@ function checkEvent(e) {
 function sendAnswer() {
     var efid = document.getElementById('answer-'+gameState.questionNr).value;
     console.log(efid);
-        webSocket.send("ANSWER "+efid);
-
+    webSocket.send("ANSWER "+efid);
+    blockeduser(uname, gameState, efid);
 }
 function showQuestion(obj) {
     
     if(obj.questionNr != '-1') {//if everybody is ready
         if(obj.isDone == true) {
+            alert("Finalul meciului");
             window.location = '/static/main-screen.html';
         }
         $('#block').hide();
@@ -140,9 +141,16 @@ function showQuestion(obj) {
         } else {//set answer box for aprox
             $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'"><a href="javascript:void(0)" onclick="sendAnswer()" class="btn btn-primary btn-sm">Raspunde</a>');
         }
-    } 
-    
-    
+    }
+    var userText='';
+    var score = obj.score;
+    for (i = 0; i < score.length; i++) {
+        userText += '<span class="title">Username: </span><span class="subtitle">'+score[i].user+'</span>';
+        userText += '<span class="title">Vieti: </span><span class="subtitle">'+score[i].lives+'</span>';
+        userText += '<span class="title">HP: </span><span class="subtitle">'+score[i].hp+'</span>';
+        userText += '<span class="title">Scor: </span><span class="subtitle">'+score[i].score+'</span>';
+    }
+    $('#users').html(userText);
 }
 function blockeduser(uname, obj, efid) {
     var i;
