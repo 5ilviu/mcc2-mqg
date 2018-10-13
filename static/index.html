@@ -22,8 +22,13 @@
 function login(){
     term = document.getElementById('login-name').value,
     url = '/api/login'; 
-   
-    var posting = $.post( url, { name: term } );
+
+    var posting = $.post(
+        url,
+        type:'POST',
+        { name: term }
+     
+      );
    
     // Put the results in a div
     posting.done(function( data ) {
