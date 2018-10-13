@@ -33,6 +33,7 @@
                 <img src="/static/img-res/person.png" width="40" height="40" id="ef-re" class="ab-btns">
                 <img src="/static/img-res/time.png" width="40" height="40" id="ef-mt" class="ab-btns">
             </div>
+            <div id="block"></div>
         </div>
     </div>
 <script>
@@ -62,6 +63,8 @@ function findGetParameter(parameterName) {
     }
     return result;
 }
+
+var uname = getCookie('username');
 var gameRoom = findGetParameter('room');//get room param
 var urlwebs = "ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom;
 
@@ -106,12 +109,15 @@ function checkEvent(e) {
     }
     if(e.target.classList.contains("answer-form"))  {
         webSocket.send("ANSWER "+efid);
+        blockeduser(uname, obj, efid);
     }
 }
 function showQuestion(obj) {
-    var uname = getCookie('username');
+    
     if(obj.questionNr != '-1') {//if everybody is ready
-        blockeduser(uname, obj);
+        
+        $('#block').hide();
+        blockeduser(uname, obj, 'NU');
         $("#ef-question").html(obj.questions[obj.questionNr].text);//set question
         if(obj.questions[obj.questionNr].typeq == '0') {//set answers for multiple 
             var answer = '';
@@ -124,11 +130,27 @@ function showQuestion(obj) {
         } else {//set answer box for aprox
             $("#ef-answers").html('<input type="number" value="" class="form-control" id="answer-'+obj.questionNr+'">');
         }
+    } else {
 
     }
 }
-function blockeduser(uname, obj) {
-    //if(uname == obj.)
+function blockeduser(uname, obj, efid) {
+    var i;
+    var players = obj.players;
+    var corectAnswer = obj.questions[obj.questionNr].correct;
+    for (i = 0; i < players.length; i++) { 
+        if(uname == players[i].user.username) {
+            if(players[i].blocked == true && efid != 'NU') {
+                if(efid == corectAnswer) {
+                    $('#block').show();
+                    $('#block').html("CORECT");
+                } else {
+                    $('#block').show();
+                    $('#block').html("GRESIT");
+                }
+            }
+        }
+    }
 }
 </script>
 </body>
