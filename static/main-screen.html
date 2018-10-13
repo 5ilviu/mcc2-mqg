@@ -63,8 +63,8 @@ $(document).ready(function(){
 
     //get rankings
     $.get( "/api/stats", function( data ) {
-        console.log(data);
         $("#clasament-holder").html(data);
+        // create rankings table
         $('#classamentul-final').bootstrapTable({
             columns: [{
                 field: 'username',
@@ -87,8 +87,8 @@ $(document).ready(function(){
     $("#go").click(function(){
         //var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
         var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/mock");//for testing
-        webSocket.onmessage = function (evt) {
-            alert(evt);
+        webSocket.onmessage = function (message) {
+            alert(message);
             window.location = '/static/search-game.html';// redirect to pre-game screen
         };
         webSocket.onerror = function(evt) {
