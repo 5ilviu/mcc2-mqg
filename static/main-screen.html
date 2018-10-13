@@ -25,11 +25,11 @@
                 </div>
                 <div class="statistici container">
                     <h2 class="text-center">Statistici</h2>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 stats">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 stats pull-left">
                         <p>Meciuri castigate</p>
                         <span  id="wins" class="circle"></span>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 stats">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 stats pull-right">
                         <p>Meciuri pierdute</p>
                         <span  id="lose" class="circle"></span>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="clasament col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <h2 align="center">Clasament</h2>
                     <div id="clasament-holder"></div>
-                    <table id="classamentul-final" border='1'>
+                    <table id="classamentul-final" border='1' style="margin-bottom:20px;">
                     </table>
                 </div>
                 <button id="go" class="btn btn-primary btn-block">Gaseste meci</button>
@@ -88,9 +88,7 @@ $(document).ready(function(){
         //var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
         var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/mock");//for testing
         webSocket.onmessage = function (e) {
-            alert(e.data);
-            console.log(e.data);
-            //window.location = '/static/search-game.html';// redirect to pre-game screen
+            window.location = '/static/search-game.html?room='+e.data;// redirect to pre-game screen
         };
         webSocket.onerror = function(evt) {
             alert("Eroare");
