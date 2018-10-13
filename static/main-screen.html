@@ -8,10 +8,19 @@
 <body>
     <div class="holder-first row-fluid">
         <div class="container">
-            <div class="row" id="mmr-hold"></div>
-            <div class="clasament col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
-            <div class="statistici col-lg-6 col-md-6 col-sm-12 col-xs-12"></div>
-            <button id="go" class="btn btn-default pull-right">GO</button>
+            <img src="/static/img-res/logo.png" width="100" height="100" class="logo">
+            <h1 align="center"> Multiplayer Quiz Game </h1>
+            <!-- Div de inlocuit cu lobby screen -->
+            <div class="row" id="ch-screen">
+                <div class="row" id="mmr-hold"></div>
+                <div class="statistici col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                <div class="clasament col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+                <button id="go" class="btn btn-default pull-right">GO</button>
+            </div>
+            <!--END-->
+            <div id="loader">
+                <img src="/static/img-res/loader.gif">
+            </div>
         </div>
     </div>
 <script>
@@ -25,9 +34,9 @@
                 alert("Data: " + data + "\nStatus: " + status);
             });
     });
-    <!-- var response = {"username": "asd", "games": null, "mmr": 0};
-    var obj = jQuery.parseJSON( response );
-    alert( obj.username); -->
+    //var response = {"username": "asd", "games": null, "mmr": 0};
+    //var obj = jQuery.parseJSON( response );
+    //alert( obj.username); 
 </script>
 </body>
 </html>
