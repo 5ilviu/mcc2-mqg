@@ -10,25 +10,37 @@
             display:none;
             height:100%;
             width:100%;
+            background-color:#2980b9;
+        }
+        .logo {
+            display:block;
+            margin:0px auto;
+        }
+        .text-center {
+            text-align:center;
+            margin:0px auto;
         }
     </style>
 </head>
 <body>
     <div class="row-fluid">
         <div class="container">
-            <h1 align="center"> Mondly </h1>
+            <img src="/img-res/loader.gif" width="100" height="100" class="logo">
             <h1 align="center"> Multiplayer Quiz Game </h1>
-            <div class="center row">
+            <div class="text-center row">
                 <input type="text" name="login-name" id="login-name" placeholder="Alege numele de utilizator..." class="from-control">
-                <button id="login-btn" class="btn btn-default">Intra in joc</button>
+                <button id="login-btn" class="btn btn-succes">Intra in joc</button>
             </div>
-            <div id="loader"></div>
+            <div id="loader">
+                <img src="/img-res/loader.gif">
+            </div>
         </div>
     </div>
 </body>
 <script>
     $(document).ready(function(){
         $("#login-btn").click(function(){
+            $("#loader").style.display = 'block';//show the loader screen
             $.post("/api/login",
             {
                 name: $("#login-name").val()
