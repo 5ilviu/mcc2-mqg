@@ -75,8 +75,8 @@ $(document).ready(function(){
     // open websocket and check for response
     $("#go").click(function(){
         var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/pre_game_socket");
-        webSocket.onmessage = function (data) {
-            alert(data);
+        webSocket.onmessage = function (msg) {
+            alert(msg);
             window.location = '/static/search-game.html';// redirect to pre-game screen
         };
         webSocket.onerror = function(evt) {
