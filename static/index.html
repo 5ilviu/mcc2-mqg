@@ -21,10 +21,12 @@
             
             $.post("/api/login",
             {
-                name: $("login-name").val()
+                name: $("#login-name").val()
             },
             function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
+                if(status == '200') {
+console.log('Succes');
+                }
             });
         });
     });
