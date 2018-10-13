@@ -5,7 +5,7 @@ import time
 from user import UserFactory
 
 QUESTION_TIME = 10
-QUESTION_NUMBER = 3
+QUESTION_NUMBER = 5
 
 
 class GameState:
@@ -94,7 +94,7 @@ class GameState:
         self.check_endgame()
 
     def check_endgame(self):
-        if QUESTION_NUMBER <= self.questionNr:
+        if QUESTION_NUMBER <= self.questionNr and not self.isDone:
             self.isDone = True
             for player in self.players:
                 for sc in self.score:
