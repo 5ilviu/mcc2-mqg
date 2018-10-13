@@ -2,7 +2,7 @@ from bson import SON
 
 
 class User:
-    def __init__(self, _id, username, wins=0, lose=0, mmr=0):
+    def __init__(self, username, _id=None, wins=0, lose=0, mmr=0):
         self._id = _id
         self.username = username
         self.wins = wins
@@ -23,8 +23,8 @@ class UserFactory:
 
     @staticmethod
     def decode(obj):
-        return User(obj["_id"],
-                    obj["username"],
+        return User(obj["username"],
+                    obj["_id"],
                     obj["wins"],
                     obj["lose"],
                     obj["mmr"])
