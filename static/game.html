@@ -39,7 +39,7 @@ $(document).ready(function(){
     // open websocket and check for response
     var gameRoom = findGetParameter('room');
     var webSocket = new WebSocket("ws://" + location.hostname + ":" + location.port + "/api/game_socket/"+gameRoom);//for testing
-    websocket.onopen = function(e) { 
+    webSocket.onopen = function(e) { 
         console.log(e.data) 
     }; 
     webSocket.onmessage = function (e) {
